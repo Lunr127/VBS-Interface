@@ -1,6 +1,6 @@
 <template>
   <div class="textInput">
-    <el-input type="textarea" :rows="3" placeholder="Please input query text" v-model="textarea" :resize="nones">
+    <el-input type="textarea" :rows="3" placeholder="Please input query text" v-model="textarea" resize="nones">
     </el-input>
   </div>
 </template>
