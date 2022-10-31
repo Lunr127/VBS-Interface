@@ -5,7 +5,7 @@
         <el-radio v-model="radio" label="1">AVS</el-radio>
         <el-radio v-model="radio" label="2">KIS</el-radio>
 
-        <el-upload style="position: absolute;width: 350px;top: 200px;" class="upload-demo" drag
+        <el-upload style="position: absolute;width: 350px;top: 160px;" class="upload-demo" drag
             action="https://jsonplaceholder.typicode.com/posts/" multiple>
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">Drag the file here, or <em>Click to upload</em></div>
