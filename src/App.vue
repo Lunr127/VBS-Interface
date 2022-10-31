@@ -10,6 +10,7 @@
     <show-all></show-all>
     <user-interact></user-interact> -->
     <info-input></info-input>
+    <all-result></all-result>
     
 
   </div>
@@ -25,6 +26,7 @@
 // import ShowAll from "./components/ShowAll.vue";
 // import UserInteract from "./components/UserInteract.vue";
 import InfoInput from "./components/InfoInput.vue";
+import AllResult from "./components/AllResult.vue";
 
 
 export default {
@@ -39,6 +41,7 @@ export default {
     // ShowAll,
     // UserInteract,
     InfoInput,
+    AllResult,
   },
 };
 </script>
