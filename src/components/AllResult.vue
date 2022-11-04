@@ -7,9 +7,6 @@
                 <img :src="previewpic" alt="" width="100%" />
             </el-dialog>
         </el-main>
-        <div class="footer">
-
-        </div>
     </el-container>
 </template>
 
