@@ -38,8 +38,6 @@ export default {
                 radioSelect: this.radio
             })
                 .then(res => {
-                    console.log(res)
-                    console.log(res.data)
                     this.$bus.$emit("getUrl", res)
                 }).catch(err => {
                     console.log(err)
