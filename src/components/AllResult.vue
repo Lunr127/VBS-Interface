@@ -4,7 +4,7 @@
             <el-image style="width: 120px; height: 80px;" v-for="url in urls" @click="ShowpreviewPic(url)" :key="url"
                 :src="url" lazy>
             </el-image>
-            <el-dialog :visible.sync="visible" :modal="false" title="Preview" width="30%">
+            <el-dialog :visible.sync="visible" :modal="false" title="Preview" width="40%">
                 <img :src="previewpic" alt="" width="100%" />
             </el-dialog>
         </el-main>
