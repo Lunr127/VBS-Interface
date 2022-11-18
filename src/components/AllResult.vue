@@ -25,8 +25,11 @@ export default {
         this.$bus.$on("getUrl", (data) => {
             this.urls = []
             data.data.forEach(element => {
-                var s = 'https://github.com/Lunr127/vbs-img/blob/main' + element + '?raw=true'
-                this.urls.push((s))
+                // var s = 'https://github.com/Lunr127/vbs-img/blob/main' + element + '?raw=true'
+                var a = element.substr(1, 5)
+                var b = element.substr(7)
+                var s = require('E:/Git/towhee-main/V3Ctest/' + a + '/' + b )
+                this.urls.push(s)
             })
             console.log(this.urls);
         })
@@ -38,7 +41,7 @@ export default {
         ShowpreviewPic(url) {
             this.previewpic = url;
             this.visible = true;
-        }
+        },
     },
 }
 </script>
