@@ -23,7 +23,7 @@
 
     <el-main>
       <el-image style="width: 118px; height: 80px; border-style: solid; border-width: 1px; border-color: white"
-        v-for="url in urls" @click="ShowpreviewPic(url)" :key="url" :src="url" lazy>
+        v-for="url in urls" @click="ShowpreviewPic(url)" :key="url.shot" :src="url.base64" lazy>
       </el-image>
       <el-dialog :visible.sync="visible" :modal="false" title="Preview" width="40%">
         <img :src="previewpic" alt="" width="100%" />
@@ -44,11 +44,12 @@ export default {
       textarea: "",
       radio: "1",
       urls: [
-        'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
-        'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
+        // 'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
+        // 'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
       ],
       visible: false,
       previewpic: "",
+      shot: "",
       Likes: [],
       NotLikes: []
     };
@@ -59,16 +60,14 @@ export default {
       this.urls = []
       this.Likes = []
       this.NotLikes = []
+      this.shots = []
       this.$axios.post('http://localhost:8050/search/text', {
         textInput: this.textarea,
         radioSelect: this.radio
       })
         .then(res => {
           res.data.forEach(element => {
-            var a = element.substr(1, 5)
-            var b = element.substr(7)
-            var s = require('E:/Git/towhee-main/V3Ctest/' + a + '/' + b)
-            this.urls.push(s)
+            this.urls.push(element)
           })
         }).catch(err => {
           console.log(err)
@@ -76,20 +75,21 @@ export default {
     },
 
     ShowpreviewPic(url) {
-      this.previewpic = url;
+      this.previewpic = url.base64;
       this.visible = true;
+      this.shot = url.shot
     },
 
     Like() {
-      this.Likes.push(this.previewpic)
+      this.Likes.push(this.shot)
       this.visible = false
-      console.log("like ", this.previewpic);
+      // console.log("like ", this.shot);
     },
 
     NotLike() {
-      this.NotLikes.push(this.previewpic)
+      this.NotLikes.push(this.shot)
       this.visible = false
-      console.log("Not like ", this.previewpic);
+      // console.log("Not like ", this.shot);
     },
 
     rerank() {
@@ -101,16 +101,13 @@ export default {
           this.urls = []
           console.log(res);
           res.data.forEach(element => {
-            var a = element.substr(1, 5)
-            var b = element.substr(7)
-            var s = require('E:/Git/towhee-main/V3Ctest/' + a + '/' + b)
-            this.urls.push(s)
+            this.urls.push(element)
           })
         }).catch(err => {
           console.log(err)
         })
       this.Likes = [],
-      this.NotLikes = []
+        this.NotLikes = []
     },
   },
 };
