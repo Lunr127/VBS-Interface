@@ -23,11 +23,13 @@
 
     <el-main>
       <el-image style="width: 118px; height: 80px; border-style: solid; border-width: 1px; border-color: white"
-        v-for="url in urls" @click="ShowpreviewPic(url)" :key="url.shot" :src="url.base64" lazy>
+        v-for="(url, index) in urls" @click="ShowpreviewPic(url, index)" :key="url.shot" :src="url.base64" lazy>
       </el-image>
-      <el-dialog :visible.sync="visible" :modal="false" title="Preview" width="40%">
+      <el-dialog :visible.sync="visible" :modal="false" width="30%" v-dialogDrag>
+        {{urlIndex}}       LikeCount:{{LikeCount}}       NotLikeCount:{{NotLikeCount}}
         <img :src="previewpic" alt="" width="100%" />
         <span slot="footer" class="dialog-footer">
+          <el-button @click="Skip" type="info" size="small">Skip</el-button>
           <el-button @click="Like" type="primary" size="small">Like</el-button>
           <el-button @click="NotLike" type="danger" size="small">Not Like</el-button>
         </span>
@@ -51,7 +53,10 @@ export default {
       previewpic: "",
       shot: "",
       Likes: [],
-      NotLikes: []
+      NotLikes: [],
+      urlIndex: 0,
+      LikeCount: 0,
+      NotLikeCount: 0,
     };
   },
   methods: {
@@ -61,6 +66,8 @@ export default {
       this.Likes = []
       this.NotLikes = []
       this.shots = []
+      this.LikeCount = 0
+      this.NotLikeCount = 0
       this.$axios.post('http://localhost:8050/search/text', {
         textInput: this.textarea,
         radioSelect: this.radio
@@ -74,22 +81,34 @@ export default {
         })
     },
 
-    ShowpreviewPic(url) {
-      this.previewpic = url.base64;
+    ShowpreviewPic(url, index) {
+      this.previewpic = url.base64
       this.visible = true;
       this.shot = url.shot
+      this.urlIndex = index
     },
 
     Like() {
+      this.LikeCount++
+      this.shot = this.urls[this.urlIndex].shot
       this.Likes.push(this.shot)
-      this.visible = false
+      this.urlIndex = this.urlIndex + 1
+      this.previewpic = this.urls[this.urlIndex].base64
       // console.log("like ", this.shot);
     },
 
     NotLike() {
+      this.NotLikeCount++
+      this.shot = this.urls[this.urlIndex].shot
       this.NotLikes.push(this.shot)
-      this.visible = false
+      this.urlIndex = this.urlIndex + 1
+      this.previewpic = this.urls[this.urlIndex].base64
       // console.log("Not like ", this.shot);
+    },
+
+    Skip() {
+      this.urlIndex = this.urlIndex + 1
+      this.previewpic = this.urls[this.urlIndex].base64
     },
 
     rerank() {
@@ -107,7 +126,7 @@ export default {
           console.log(err)
         })
       this.Likes = [],
-        this.NotLikes = []
+      this.NotLikes = []
     },
   },
 };

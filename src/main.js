@@ -3,6 +3,7 @@ import App from './App.vue'
 import {Button, Input, Image, Radio, Upload, Row, Col, Dialog, Container, Main} from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios'
+import './dialogDrag'
 
 Vue.config.productionTip = false
 Vue.use(Button)
