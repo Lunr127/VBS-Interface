@@ -7,7 +7,7 @@
     <el-radio style="position: absolute;width: 20px;top: 135px;left: 110px;" v-model="radio" label="2">KIS</el-radio>
 
     <el-upload style="position: absolute;width: 350px;top: 220px;left: 20px;" class="upload-demo" drag
-      action="https://jsonplaceholder.typicode.com/posts/" multiple>
+      action="http://localhost:8050/search/image" multiple>
       <i class="el-icon-upload"></i>
       <div class="el-upload__text">Drag the file here, or <em>Click to upload</em></div>
     </el-upload>
